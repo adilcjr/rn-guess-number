@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Button, Image } from 'react-native'
 
 import DefaultText from '../components/DefaultText'
 import TitleText from '../components/TitleText'
+import { Colors } from '../constants/colors'
 
 const GameOver = props => {
   return (
@@ -10,14 +11,16 @@ const GameOver = props => {
       <TitleText>The game is over!</TitleText>
       <View style={styles.imageContainer} >
         <Image 
-          // source={require('../assets/success.png')}
-          source={{uri: 'https://cdn.pixabay.com/photo/2016/05/05/23/52/mountain-summit-1375015_1280.jpg'}}
+          source={require('../assets/success.png')}
+          //source={{uri: 'https://cdn.pixabay.com/photo/2016/05/05/23/52/mountain-summit-1375015_1280.jpg'}}
           style={styles.image}
           resizeMode='cover'
         />
       </View>
-      <DefaultText>Number of round: { props.roundsNumber }</DefaultText>
-      <DefaultText>User number: { props.userNumber }</DefaultText>
+      {/* <DefaultText>
+        Your phone needed  <Text style={styles.highlight}>{ props.roundsNumber }</Text> 
+        rounds to guess the number <Text style={styles.highlight}>{props.userNumber}</Text>.
+      </DefaultText> */}
       <Button title='New game' onPress={props.onRestart}></Button>
     </View>
   )
@@ -40,6 +43,9 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+  },
+  highlight: {
+    color: Colors.primary,
   }
 })
 
