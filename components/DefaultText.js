@@ -1,12 +1,8 @@
 import React from 'react'
-import {Text, StyleSheet} from 'react-native';
+import {Text} from 'react-native';
 
-const DefaultText = props => <Text style={{...styles.default, ...props.style}}>{props.children}</Text>
+import styles from '../constants/defaultStyles'
 
-const styles = StyleSheet.create({
-  default: {
-    fontFamily: 'open-sans'
-  }
-})
+const DefaultText = props => <Text style={{...styles.defaultText, ...props.style}}>{props.children}</Text>
 
 export default DefaultText

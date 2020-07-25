@@ -14,6 +14,7 @@ import Input from '../components/Input'
 import NumberContainer from '../components/NumberContainer'
 import Colors from '../constants/colors'
 import DefaultText from '../components/DefaultText'
+import DefaultButton from '../components/DefaultButton'
 import TitleText from '../components/TitleText'
 
 const StartGame = props => {
@@ -51,7 +52,9 @@ const StartGame = props => {
       <Card style={styles.summaryContainer}>
         <Text>You selected</Text>
         <NumberContainer>{selectedNumber}</NumberContainer>
-        <Button title='START GAME' onPress={ () => props.onStartGame(selectedNumber) } />
+        <DefaultButton onPress={ () => props.onStartGame(selectedNumber) }>
+          Let me guess!
+        </DefaultButton>
       </Card>
     )
   }
@@ -75,20 +78,20 @@ const StartGame = props => {
             value={enteredValue}
           />
           <View style={styles.buttonContainer}>
-            <View style={styles.button}>
-              <Button 
-                title='Reset' 
-                onPress={ resetInputHandler }
-                color={Colors.secundary}
-              />
-            </View>
-            <View style={styles.button}>
-              <Button 
-                title='Confirm' 
-                onPress={ confirmInputHandler}
-                color={Colors.primary}
-              />
-            </View>
+            <DefaultButton 
+              style={styles.button}
+              onPress={ resetInputHandler }
+              color={Colors.secundary}
+            >
+              Reset
+            </DefaultButton>
+            <DefaultButton 
+              style={styles.button}
+              onPress={ confirmInputHandler}
+              color={Colors.primary}
+            >
+              Confirm
+            </DefaultButton>
           </View>
         </Card>
         {confirmedOutput}
@@ -105,6 +108,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
+    marginVertical: 25,
   },
   inputContainer: {
     alignItems: 'center',
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15
   },
   button: {
-    width: 100,
+    width: 120,
   },
   input: {
     width: 50,

@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text, Button, Image } from 'react-native'
 
 import DefaultText from '../components/DefaultText'
+import DefaultButton from '../components/DefaultButton'
 import TitleText from '../components/TitleText'
 import Colors from '../constants/colors'
 
@@ -24,7 +25,9 @@ const GameOver = props => {
           <Text style={styles.highlight}> {props.userNumber}</Text>.
         </DefaultText>
       </View>
-      <Button title='New game' onPress={props.onRestart}></Button>
+      <DefaultButton onPress={props.onRestart}>
+        New Game
+      </DefaultButton>
     </View>
   )
 }
