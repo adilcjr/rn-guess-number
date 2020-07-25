@@ -11,12 +11,12 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: Colors.cardBackground,
     borderRadius: 10,
-    elevation: 5,
+    elevation: 8,
     padding: 20,
     shadowColor: Colors.cardShadow,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 3 },
     shadowRadius: 6,
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.8,
   }
 });
 

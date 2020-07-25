@@ -7,6 +7,7 @@ import Header from './components/Header'
 import StartGame from './screens/StartGame'
 import Game from './screens/Game'
 import GameOver from './screens/GameOver'
+import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -68,6 +69,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1
+    flex: 1,
+    backgroundColor: Colors.screenBackground,
   }
 })

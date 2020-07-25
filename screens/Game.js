@@ -7,6 +7,8 @@ import DefaultButton from '../components/DefaultButton'
 import DefaultText from '../components/DefaultText'
 import Card from '../components/Card'
 
+import Colors from '../constants/colors'
+
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min)
   max = Math.floor(max)
@@ -60,8 +62,10 @@ const Game = props => {
 
   return (
     <View style={styles.screen}>
-      <Text>Opponent's Guess</Text>
-      <NumberContainer>{currentGuess}</NumberContainer>
+      <Card style={styles.guessContainer}>
+        <Text>Opponent's Guess</Text>
+        <NumberContainer>{currentGuess}</NumberContainer>
+      </Card>
       <Card style={styles.buttonContainer}>
         <DefaultButton onPress={nextGuessHandler.bind(this, 'lower')} >
           <Ionicons name='md-remove' size={24} color='white' />
@@ -90,6 +94,11 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     alignItems: 'center',
+    backgroundColor: Colors.screenBackground,
+  },
+  guessContainer: {
+    alignItems: 'center',
+    width: '90%',
   },
   buttonContainer: {
     flexDirection: 'row',

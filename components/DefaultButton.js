@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
   buttonText: {
-    color: 'white',
+    color: Colors.buttonText,
     fontFamily: 'open-sans',
   }
 })
