@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect} from 'react'
 import { 
   Dimensions,
   Image,
@@ -14,11 +14,36 @@ import TitleText from '../components/TitleText'
 import Colors from '../constants/colors'
 
 const GameOver = props => {
+  const [availableDeviceWidth, setAvailableDeviceWidth] = useState(
+    Dimensions.get('window').width
+  )
+  const [availableDeviceHeight, setAvailableDeviceHeight] = useState(
+    Dimensions.get('window').height
+  )
+
+  useEffect(() => {
+    const updateLayout = () => {
+      setAvailableDeviceWidth(Dimensions.get('window').width)
+      setAvailableDeviceHeight(Dimensions.get('window').height)
+    }
+    Dimensions.addEventListener('change', updateLayout)
+
+    return () => {
+      Dimensions.removeEventListener('change', updateLayout)
+    }
+  })
+
+
   return (
     <ScrollView>
       <View style={styles.screen}>
         <TitleText>The game is over!</TitleText>
-        <View style={styles.imageContainer} >
+        <View style={{...styles.imageContainer, ...{
+          borderRadius: availableDeviceHeight * 0.5 / 2,
+          height: availableDeviceHeight * 0.5,
+          marginVertical: availableDeviceHeight / 30,
+          width: availableDeviceHeight * 0.5,
+        }}} >
           <Image 
             source={require('../assets/success.png')}
             //source={{uri: 'https://cdn.pixabay.com/photo/2016/05/05/23/52/mountain-summit-1375015_1280.jpg'}}
@@ -26,8 +51,12 @@ const GameOver = props => {
             resizeMode='cover'
           />
         </View>
-        <View style={styles.resultContainer}>
-          <DefaultText style={styles.resultText}>Your phone needed
+        <View style={{...styles.resultContainer, ...{
+          marginVertical: availableDeviceHeight / 60,
+        }}}>
+          <DefaultText style={{...styles.resultText, ...{
+            fontSize: availableDeviceHeight < 400 ? 16 : 20,
+          }}}>Your phone needed
             <Text style={styles.highlight}> {props.roundsNumber} </Text> 
             rounds to guess the number 
             <Text style={styles.highlight}> {props.userNumber}</Text>.
@@ -46,15 +75,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: 10,
   },
   imageContainer: {
     borderColor: 'black',
-    borderRadius: Dimensions.get('window').width * 0.7 / 2,
     borderWidth: 3,
-    height: Dimensions.get('window').width * 0.7,
-    marginVertical: Dimensions.get('window').height / 30,
     overflow: 'hidden',
-    width: Dimensions.get('window').width * 0.7,
   },
   image: {
     width: '100%',
@@ -66,11 +92,9 @@ const styles = StyleSheet.create({
   },
   resultContainer: {
     marginHorizontal: 30,
-    marginVertical: Dimensions.get('window').height / 60,
   },
   resultText: {
     textAlign: 'center',
-    fontSize: Dimensions.get('window').height < 400 ? 16 : 20,
   }
 })
 

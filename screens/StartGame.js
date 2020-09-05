@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Alert,
   Dimensions,
@@ -24,6 +24,15 @@ const StartGame = props => {
   const [enteredValue, setEnteredValue] = useState('')
   const [confirmed, setConfirmed] = useState(false)
   const [selectedNumber, setSelectedNumber] = useState()
+  const [buttonWidth, setButtonWidth] = useState(
+    Dimensions.get('window').width / 4
+  )
+
+  const updateLayout = () => {
+    setButtonWidth(Dimensions.get('window').width / 4)
+  }
+
+  Dimensions.addEventListener('change', updateLayout)
 
   const numberInputHandler = inputText => {
     setEnteredValue(inputText.replace(/[^0-9]/g, ''))
@@ -33,6 +42,17 @@ const StartGame = props => {
     setEnteredValue('')
     setConfirmed(false)
   }
+
+  useEffect(() => {
+    const updateLayout = () => {
+      setButtonWidth(Dimensions.get('window').width / 4)
+    }
+  
+    Dimensions.addEventListener('change', updateLayout)
+    return () => {
+      Dimensions.removeEventListener('change', updateLayout)
+    }
+  })
 
   const confirmInputHandler = () => {
     const chosenNumber = parseInt(enteredValue)
@@ -83,14 +103,14 @@ const StartGame = props => {
               />
               <View style={styles.buttonContainer}>
                 <DefaultButton 
-                  style={styles.button}
+                  style={{ width: buttonWidth }}
                   onPress={ resetInputHandler }
                   color={Colors.secundary}
                 >
                   Reset
                 </DefaultButton>
                 <DefaultButton 
-                  style={styles.button}
+                  style={{ width: buttonWidth }}
                   onPress={ confirmInputHandler}
                   color={Colors.primary}
                 >
@@ -127,9 +147,6 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     paddingHorizontal: 15
-  },
-  button: {
-    width: Dimensions.get('window').width/4
   },
   input: {
     width: 50,
