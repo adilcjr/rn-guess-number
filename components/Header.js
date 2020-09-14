@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
   },
   headerTitle: {
-    color: Platform === 'ios' ? Colors.primary : Colors.fontTitle,
+    color: Platform.OS === 'ios' ? Colors.primary : Colors.fontTitle,
     fontSize: 18,
   }
 });
